@@ -20,4 +20,12 @@ if(products != null){
     log("----->ProductController");
   productList.value = products;
   }}
+
+  List<String> imageUrls = [
+    'https://images.unsplash.com/photo-1557167668-6eb71e76b603?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Z3VjY2l8ZW58MHwwfDB8fHww',
+    'https://images.unsplash.com/photo-1624796037770-c57cb79a567a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Z3VjY2l8ZW58MHwwfDB8fHww',
+    'https://images.unsplash.com/photo-1609178016676-dfbdbdeaddbb?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGNoYW5uZWx8ZW58MHwwfDB8fHww',
+    'https://images.unsplash.com/photo-1588992370249-1b0fcaf6249b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGRpb3J8ZW58MHwwfDB8fHww',
+    'https://images.unsplash.com/photo-1622127209712-358cd618abd5?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGRpb3J8ZW58MHwwfDB8fHww',
+  ];
 }

@@ -10,6 +10,7 @@ class ProductTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Colors.white,
       elevation: 2,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -38,22 +39,49 @@ class ProductTile extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
             const SizedBox(height: 8),
-            Container(
-              decoration: BoxDecoration(
-                color: const Color(0xff840032),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    "${'\$'}${product.price.toString()}",
-                    style: const TextStyle(color: Colors.white),
+            Row(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: const Color(0xff840032),
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                 
-                ],
-              ),
+                  padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        "${'\$'}${product.price.toString()}",
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                     
+                    ],
+                  ),
+                ),
+                   const SizedBox(width: 2),
+                   
+                Container(
+                  decoration: BoxDecoration(
+                    color: const Color(0xffE59500),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  child: const Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(Icons.shopping_bag_outlined,color: Colors.white, size: 18),
+                          Text(
+                            "Buy",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
            
           ],

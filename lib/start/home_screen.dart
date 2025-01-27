@@ -11,7 +11,8 @@ class HomeScreen extends StatelessWidget {
   final ProductController productController = Get.put(ProductController());
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return
+     Scaffold(
       backgroundColor: const Color(0Xffe5dada),
       appBar: AppBar(
         backgroundColor:  Colors.black,
@@ -43,34 +44,83 @@ centerTitle: true,
             )
             ],
       ),
-      body: 
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 20, top: 10),
-              child: Text(
-                "Featured Products",
-                style: GoogleFonts.roboto(
-                    textStyle: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 12,
-                )),
+    body: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: centerDisplayCard(),
               ),
-            ),
-        Expanded(
-          child: Padding(padding: const EdgeInsets.all(10), 
-                child: 
-                Obx(
-                  ()=> GridView.builder(
-                            gridDelegate:  const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, mainAxisSpacing: 10, crossAxisSpacing: 10,childAspectRatio: 0.9), 
-                            itemCount: productController.productList.length,
-                  itemBuilder: (context, index){
-                            return ProductTile(productController.productList[index]);
-                  }),
-                )),
-        )],)
+              Padding(
+                padding: const EdgeInsets.only(left: 20, top: 10),
+                child: Text(
+                  "Featured Products",
+                  style: GoogleFonts.roboto(
+                    textStyle: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: productController.productList.isEmpty
+                    ? const Center(child: Text("No data found"))
+                    : Obx(
+                        () => GridView.builder(
+                          physics: const ScrollPhysics(),
+                          shrinkWrap: true,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 8,
+                            crossAxisSpacing: 8,
+                            childAspectRatio: 0.9,
+                          ),
+                          itemCount: productController.productList.length,
+                          itemBuilder: (context, index) {
+                            return ProductTile(
+                                productController.productList[index]);
+                          },
+                        ),
+                      ),
+              ),
+            ],
+          ),
+        )
     );
   }
+
+Widget centerDisplayCard() {
+    return SizedBox(
+      height: 200, // Set a fixed height for the ListView
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        physics: const BouncingScrollPhysics(),
+        itemCount: productController.imageUrls.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              height: 200, // Make sure the height matches the SizedBox height
+              width: 350,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                image: DecorationImage(
+                  image: NetworkImage(productController.imageUrls[index]),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
 }
