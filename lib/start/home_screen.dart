@@ -26,13 +26,19 @@ class HomeScreen extends StatelessWidget {
     ),
   ),
 ),
-leading:   IconButton(
+     leading: Builder(
+        builder: (BuildContext context) {
+          return IconButton(
             icon: const Icon(Icons.menu, color: Colors.white),
             onPressed: () {
-              // Navigate to the search screen
+              // Open the drawer
+              Scaffold.of(context).openDrawer();
             },
-          ),
+          );
+        },
+      ),
 centerTitle: true,
+
         actions: [
 
         
@@ -43,6 +49,60 @@ centerTitle: true,
               },
             )
             ],
+      ),
+         drawer: Drawer(
+        backgroundColor: Colors.black,
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: const EdgeInsets.all(10),
+          children: [
+            DrawerHeader(
+
+              decoration: const BoxDecoration(
+               
+              ),
+              child: Text(
+  "Bazaar",
+  style: GoogleFonts.bonaNova(
+    textStyle: const TextStyle(
+      color: Colors.white,
+      fontSize: 30,
+    ),
+  ),
+),
+            ),
+            ListTile(
+              title: const Text('Home', style: TextStyle(color: Colors.white),),
+              // selected: _selectedIndex == 0,
+              onTap: () {
+                // Update the state of the app
+                // _onItemTapped(0);
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: const Text('Business', style: TextStyle(color: Colors.white),),
+              // selected: _selectedIndex == 1,
+              onTap: () {
+                // Update the state of the app
+             
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: const Text('School', style: TextStyle(color: Colors.white),),
+              // selected: _selectedIndex == 2,
+              onTap: () {
+                // Update the state of the app
+              
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
       ),
     body: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
