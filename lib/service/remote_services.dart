@@ -5,7 +5,7 @@ class RemoteServices {
 
   static Future<List<Product>?> fetchproducts() async {
 var response = await client.get(Uri.parse(
-        'https://fakestoreapi.com/products?limit=100'));
+        'https://fakestoreapi.com/products?limit=1000'));
           if (response.statusCode == 200) {
       var jsonString = response.body;
       return productsFromJson(jsonString);

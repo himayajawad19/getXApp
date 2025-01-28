@@ -3,6 +3,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:getx_app/controller/product_controller.dart';
+import 'package:getx_app/drawer/shop/shop.dart';
 import 'package:getx_app/start/product_tile.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
@@ -42,9 +43,9 @@ centerTitle: true,
         actions: [
 
              IconButton(
-              icon: const Icon(Icons.search, color: Colors.white),
+              icon: const Icon(Icons.shopping_bag_outlined, color: Colors.white),
               onPressed: () {
-                // Navigate to the search screen
+            Get.toNamed('/shop');
               },
             )
             ],
@@ -65,42 +66,32 @@ centerTitle: true,
                   ),
                 ),
               ),
-                // selected: _selectedIndex == 0,
                 onTap: () {
-                  // Update the state of the app
-                  // _onItemTapped(0);
-                  // Then close the drawer
                   Navigator.pop(context);
                 },
               ),
 
             ListTile(
               title: const Text('Home', style: TextStyle(color: Colors.white),),
-              // selected: _selectedIndex == 0,
               onTap: () {
-                // Update the state of the app
-                // _onItemTapped(0);
-                // Then close the drawer
+                Get.toNamed('/home');
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              title: const Text('Business', style: TextStyle(color: Colors.white),),
+              title: const Text('Shop', style: TextStyle(color: Colors.white),),
               // selected: _selectedIndex == 1,
               onTap: () {
                 // Update the state of the app
-             
+              Get.toNamed('/shop');
                 // Then close the drawer
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              title: const Text('School', style: TextStyle(color: Colors.white),),
-              // selected: _selectedIndex == 2,
+              title: const Text('Contact Us', style: TextStyle(color: Colors.white),),
+
               onTap: () {
-                // Update the state of the app
-              
-                // Then close the drawer
                 Navigator.pop(context);
               },
             ),
