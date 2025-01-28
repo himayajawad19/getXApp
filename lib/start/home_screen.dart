@@ -5,6 +5,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:getx_app/controller/product_controller.dart';
 import 'package:getx_app/start/product_tile.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HomeScreen extends StatelessWidget {
    HomeScreen({super.key});
@@ -38,10 +39,8 @@ class HomeScreen extends StatelessWidget {
         },
       ),
 centerTitle: true,
-
         actions: [
 
-        
              IconButton(
               icon: const Icon(Icons.search, color: Colors.white),
               onPressed: () {
@@ -51,26 +50,30 @@ centerTitle: true,
             ],
       ),
          drawer: Drawer(
+          width: 300,
         backgroundColor: Colors.black,
         child: ListView(
           // Important: Remove any padding from the ListView.
-          padding: const EdgeInsets.all(10),
           children: [
-            DrawerHeader(
-
-              decoration: const BoxDecoration(
-               
+              ListTile(
+                title: Text(
+                "Bazaar",
+                style: GoogleFonts.bonaNova(
+                  textStyle: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
+                  ),
+                ),
               ),
-              child: Text(
-  "Bazaar",
-  style: GoogleFonts.bonaNova(
-    textStyle: const TextStyle(
-      color: Colors.white,
-      fontSize: 30,
-    ),
-  ),
-),
-            ),
+                // selected: _selectedIndex == 0,
+                onTap: () {
+                  // Update the state of the app
+                  // _onItemTapped(0);
+                  // Then close the drawer
+                  Navigator.pop(context);
+                },
+              ),
+
             ListTile(
               title: const Text('Home', style: TextStyle(color: Colors.white),),
               // selected: _selectedIndex == 0,
@@ -103,37 +106,29 @@ centerTitle: true,
             ),
           ],
         ),
-      ),
-    body: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          scrollDirection: Axis.vertical,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: centerDisplayCard(),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20, top: 10),
-                child: Text(
-                  "Featured Products",
-                  style: GoogleFonts.roboto(
-                    textStyle: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 12,
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: productController.productList.isEmpty
-                    ? const Center(child: Text("No data found"))
-                    : Obx(
-                        () => GridView.builder(
-                          physics: const ScrollPhysics(),
+        ),
+      body: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            scrollDirection: Axis.vertical,
+            child:Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+    Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: centerDisplayCard(),
+    ),
+    Obx(() {
+      // Single Obx for both `isProductListEmpty` and `productList`
+      if (productController.isProductListEmpty.value) {
+        return Shimmer.fromColors(
+                      baseColor: Colors.grey.shade500,
+                      highlightColor: Colors.grey.shade300,
+                      enabled: true,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: GridView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
@@ -142,16 +137,61 @@ centerTitle: true,
                             crossAxisSpacing: 8,
                             childAspectRatio: 0.9,
                           ),
-                          itemCount: productController.productList.length,
+                          itemCount:
+                              4, // Placeholder count (e.g., 4 shimmer tiles)
                           itemBuilder: (context, index) {
-                            return ProductTile(
-                                productController.productList[index]);
+                            // Placeholder tile for shimmer effect
+                            return Container(
+                              decoration: BoxDecoration(
+                                color: Colors.grey.shade300,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            );
                           },
                         ),
                       ),
+                    );
+      } else {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 20, top: 10),
+              child: Text(
+                "Featured Products",
+                style: GoogleFonts.roboto(
+                  textStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 12,
+                  ),
+                ),
               ),
-            ],
-          ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: GridView.builder(
+                physics: const NeverScrollableScrollPhysics(), // Prevent nested scrolling
+                shrinkWrap: true, // Allow GridView inside Column
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 8,
+                  crossAxisSpacing: 8,
+                  childAspectRatio: 0.9,
+                ),
+                itemCount: productController.productList.length,
+                itemBuilder: (context, index) {
+                  return ProductTile(
+                    productController.productList[index],
+                  );
+                },
+              ),
+            ),
+          ],
+        );
+      }
+    }),
+  ],
+)
         )
     );
   }
