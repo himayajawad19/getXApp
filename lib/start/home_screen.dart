@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:getwidget/components/carousel/gf_carousel.dart';
+import 'package:getwidget/components/search_bar/gf_search_bar.dart';
+import 'package:getwidget/getwidget.dart';
 import 'package:getx_app/controller/product_controller.dart';
-import 'package:getx_app/drawer/shop/shop.dart';
 import 'package:getx_app/start/product_tile.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
@@ -15,89 +16,60 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return
      Scaffold(
-      backgroundColor: const Color(0Xffe5dada),
+      backgroundColor: Colors.white,
+
       appBar: AppBar(
-        backgroundColor:  Colors.black,
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(Icons.menu, color: Colors.black),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            );
+          },
+        ),
+        backgroundColor:  Colors.white,
         title:
        Text(
   "Bazaar",
   style: GoogleFonts.bonaNova(
     textStyle: const TextStyle(
-      color: Colors.white,
+      color: Colors.black,
       fontSize: 30,
     ),
   ),
 ),
-     leading: Builder(
-        builder: (BuildContext context) {
-          return IconButton(
-            icon: const Icon(Icons.menu, color: Colors.white),
-            onPressed: () {
-              // Open the drawer
-              Scaffold.of(context).openDrawer();
-            },
-          );
-        },
-      ),
-centerTitle: true,
+
+automaticallyImplyLeading: false,
         actions: [
 
+           
+            
              IconButton(
-              icon: const Icon(Icons.shopping_bag_outlined, color: Colors.white),
+              icon: const Icon(Icons.shopping_bag_outlined, color: Colors.black),
               onPressed: () {
             Get.toNamed('/shop');
               },
             )
             ],
       ),
-         drawer: Drawer(
-          width: 300,
-        backgroundColor: Colors.black,
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          children: [
-              ListTile(
-                title: Text(
-                "Bazaar",
-                style: GoogleFonts.bonaNova(
-                  textStyle: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 30,
-                  ),
-                ),
-              ),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-
-            ListTile(
-              title: const Text('Home', style: TextStyle(color: Colors.white),),
-              onTap: () {
-                Get.toNamed('/home');
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: const Text('Shop', style: TextStyle(color: Colors.white),),
-              // selected: _selectedIndex == 1,
-              onTap: () {
-                // Update the state of the app
-              Get.toNamed('/shop');
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: const Text('Contact Us', style: TextStyle(color: Colors.white),),
-
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
-        ),
+      
+      drawer: GFDrawer(
+  child: ListView(
+    padding: EdgeInsets.zero,
+    children: const <Widget>[
+      ListTile(
+        title: Text('Item 1'),
+        onTap: null,
+      ),
+      ListTile(
+         title: Text('Item 2'),
+         onTap: null,
+      ),
+    ],
+  ),
+),
       body: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
             scrollDirection: Axis.vertical,
@@ -109,6 +81,59 @@ centerTitle: true,
       padding: const EdgeInsets.all(8.0),
       child: centerDisplayCard(),
     ),
+  GFSearchBar(
+            searchList: productController.list,
+            searchQueryBuilder: (query, list) {
+              return list
+                  .where((item) =>
+                      item?.toLfowerCase().contains(query.toLowerCase()))
+                  .toList();
+            },
+            overlaySearchListHeight: 150,
+            overlaySearchListItemBuilder: (item) {    
+              return Container(
+                padding: const EdgeInsets.all(8),
+                child: Text(
+                  item,
+                  style: const TextStyle(fontSize: 12),
+                ),
+              );
+            },
+            searchBoxInputDecoration: InputDecoration(
+              enabledBorder: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  color: Colors.transparent,
+                ),
+                borderRadius: BorderRadius.circular(50),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  color: Colors.transparent,
+                ),
+                borderRadius: BorderRadius.circular(50),
+              ),
+              hintText: 'Search',
+              hintStyle: const TextStyle(fontSize: 12),
+              contentPadding: const EdgeInsets.only(left: 28),
+              filled: true,
+              fillColor: Colors.grey.shade100,
+
+              prefixIcon: const Padding(
+                padding: EdgeInsets.only(right: 24.0, left: 16.0),
+                child: Icon(
+                  Icons.search,
+                  color: Colors.black,
+                  size: 20,
+                ),
+
+              ),
+            ),
+            onItemSelected: (item) {
+              // setState(() {
+              //   print('$item');
+              // });
+            },
+          ),
     Obx(() {
       // Single Obx for both `isProductListEmpty` and `productList`
       if (productController.isProductListEmpty.value) {
@@ -188,30 +213,42 @@ centerTitle: true,
   }
 
 Widget centerDisplayCard() {
-    return SizedBox(
-      height: 200, // Set a fixed height for the ListView
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        physics: const BouncingScrollPhysics(),
-        itemCount: productController.imageUrls.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: 200, // Make sure the height matches the SizedBox height
-              width: 350,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                image: DecorationImage(
-                  image: NetworkImage(productController.imageUrls[index]),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          );
-        },
-      ),
+  
+  if (productController.imageUrls.isEmpty) {
+      return const Center(child: Text("No images available"));
+    }
+    else {
+    return
+      GFCarousel(
+        autoPlay: true,
+    autoPlayInterval: const Duration(milliseconds: 5000),
+    autoPlayCurve: Curves.decelerate,
+        aspectRatio: 1.7769,
+        scrollPhysics: const BouncingScrollPhysics(),
+    items:productController.imageUrls.map(
+     (url) {
+     return 
+     Container(
+       margin: const EdgeInsets.all(6.0),
+       child: ClipRRect(
+         borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+          child: Image.network(
+             url,
+             fit: BoxFit.cover,
+              // width: 6000
+           ),
+        ),
+      );
+      },
+     ).toList(),
+    // onPageChanged: (index) {
+    //     Obx(()=>  index);
+    //   // setState(() {
+   
+    //   // });
+    // }
     );
   }
+}
 
 }

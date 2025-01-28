@@ -11,6 +11,13 @@ class ProductController extends GetxController{
   var productList = <Product>[].obs;
   var isProductListEmpty = false.obs;
 
+  List list = [
+    "Flutter",
+    "React",
+    "Ionic",
+    "Xamarin",
+  ];
+
   void fetchproducts() async{
   isProductListEmpty.value = true;
    var products= await RemoteServices.fetchproducts();
