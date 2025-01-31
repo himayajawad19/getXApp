@@ -6,6 +6,7 @@ import 'package:getwidget/components/search_bar/gf_search_bar.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:getx_app/controller/product_controller.dart';
 import 'package:getx_app/start/product_tile.dart';
+import 'package:getx_app/utils/app_constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -265,6 +266,7 @@ automaticallyImplyLeading: false,
                 ),
                 itemCount: productController.productList.length,
                 itemBuilder: (context, index) {
+                  AppConstants.id=productController.productList[index].id;
                   return ProductTile(
                     productController.productList[index],
                   );

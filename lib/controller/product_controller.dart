@@ -36,6 +36,8 @@ class ProductController extends GetxController{
     'https://images.unsplash.com/photo-1622127209712-358cd618abd5?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGRpb3J8ZW58MHwwfDB8fHww',
   ];
 
+ 
+
     @override
   void onInit() {
     super.onInit();
