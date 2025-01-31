@@ -6,8 +6,8 @@ appRoutes() => [
       GetPage(
         name: '/home',
         page: () => HomeScreen(),
-        // transition: Transition.fade,
-        // transitionDuration: const Duration(milliseconds: 500),
+        transition: Transition.rightToLeftWithFade,
+        transitionDuration: const Duration(milliseconds: 500),
       ),
          GetPage(
         name: '/shop',

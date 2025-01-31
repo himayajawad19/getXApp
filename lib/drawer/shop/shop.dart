@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:getwidget/components/drawer/gf_drawer.dart';
 import 'package:getx_app/controller/product_controller.dart';
 import 'package:getx_app/start/product_tile.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,14 +15,14 @@ class Shop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0Xffe5dada),
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
         title: Text(
           "Bazaar",
           style: GoogleFonts.bonaNova(
             textStyle: const TextStyle(
-              color: Colors.white,
+              color: Colors.black,
               fontSize: 30,
             ),
           ),
@@ -29,7 +30,7 @@ class Shop extends StatelessWidget {
         leading: Builder(
           builder: (BuildContext context) {
             return IconButton(
-              icon: const Icon(Icons.menu, color: Colors.white),
+              icon: const Icon(Icons.menu, color: Colors.black),
               onPressed: () {
                 // Open the drawer
                 Scaffold.of(context).openDrawer();
@@ -40,77 +41,111 @@ class Shop extends StatelessWidget {
         centerTitle: true,
         actions: [
           IconButton(
-            icon: const Icon(Icons.search, color: Colors.white),
+            icon: const Icon(Icons.search, color: Colors.black),
             onPressed: () {
               Get.toNamed('/shop');
             },
           )
         ],
       ),
-      drawer: Drawer(
-        width: 300,
-        backgroundColor: Colors.black,
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          children: [
-            ListTile(
-              title: Text(
-                "Bazaar",
-                style: GoogleFonts.bonaNova(
-                  textStyle: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 30,
+      drawer: GFDrawer(
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Color(0xffE59500), Color(0xff02040F), Color(0xffe5dada)],
+              stops: [0.1, 1.9, 0.3],
+            ),
+          ),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 50.0),
+                child: ListTile(
+                  title: Text(
+                    "Bazaar",
+                    style: GoogleFonts.bonaNova(
+                      textStyle: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 30,
+                      ),
+                    ),
                   ),
+                  onTap: null,
                 ),
               ),
-              // selected: _selectedIndex == 0,
-              onTap: () {
-                // Update the state of the app
-                // _onItemTapped(0);
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: const Text(
-                'Home',
-                style: TextStyle(color: Colors.white),
+              Expanded(
+                child: ListView(
+                  padding: const EdgeInsets.only(top: 10),
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: ListTile(
+                        leading: const Icon(Icons.home,
+                            size: 27, color: Colors.white),
+                        title: const Text('Home',
+                            style:
+                                TextStyle(fontSize: 14, color: Colors.white)),
+                        onTap: () {
+                          Get.toNamed('/home');
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: ListTile(
+                          leading: const Icon(Icons.shopping_bag_rounded,
+                              size: 27, color: Colors.white),
+                          title: const Text('Shop',
+                              style:
+                                  TextStyle(fontSize: 14, color: Colors.white)),
+                          onTap: () => Get.toNamed('/shop')),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 10),
+                      child: ListTile(
+                        leading:
+                            Icon(Icons.phone, size: 27, color: Colors.white),
+                        title: Text('Contact Us',
+                            style:
+                                TextStyle(fontSize: 14, color: Colors.white)),
+                        onTap: null,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              // selected: _selectedIndex == 0,
-              onTap: () {
-                Get.toNamed('/home');
-                // _onItemTapped(0);
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: const Text(
-                'Shop',
-                style: TextStyle(color: Colors.white),
+              const Divider(
+                  color: Colors.white70,
+                  thickness: 1,
+                  indent: 15,
+                  endIndent: 15),
+              const Padding(
+                padding: EdgeInsets.only(left: 10),
+                child: ListTile(
+                  leading: Icon(Icons.settings, size: 27, color: Colors.white),
+                  title: Text('Settings',
+                      style: TextStyle(fontSize: 14, color: Colors.white)),
+                  onTap: null,
+                ),
               ),
-              // selected: _selectedIndex == 1,
-              onTap: () {
-                // Update the state of the app
-                Get.toNamed('/shop');
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: const Text(
-                'Contact Us',
-                style: TextStyle(color: Colors.white),
+              const Divider(
+                  color: Colors.white70,
+                  thickness: 1,
+                  indent: 15,
+                  endIndent: 15),
+              const Padding(
+                padding: EdgeInsets.only(left: 10, bottom: 20),
+                child: ListTile(
+                  leading: Icon(Icons.logout, size: 27, color: Colors.white),
+                  title: Text('Log Out',
+                      style: TextStyle(fontSize: 14, color: Colors.white)),
+                  onTap: null,
+                ),
               ),
-              // selected: _selectedIndex == 2,
-              onTap: () {
-                // Update the state of the app
-
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       body: SingleChildScrollView(

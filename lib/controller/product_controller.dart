@@ -10,14 +10,9 @@ import 'package:getx_app/service/remote_services.dart';
 class ProductController extends GetxController{
   var productList = <Product>[].obs;
   var isProductListEmpty = false.obs;
-
-  List list = [
-    "Flutter",
-    "React",
-    "Ionic",
-    "Xamarin",
-  ];
-
+  var list = <String>[].obs;
+   
+ 
   void fetchproducts() async{
   isProductListEmpty.value = true;
    var products= await RemoteServices.fetchproducts();
@@ -25,6 +20,8 @@ class ProductController extends GetxController{
       log("Fetched products: ${products.length}");
       productList.value = products;
       isProductListEmpty.value = false;
+     list.value = products.map((items){return items.title;}).toList();
+
     }
     else{
       isProductListEmpty.value = true;

@@ -56,20 +56,89 @@ automaticallyImplyLeading: false,
       ),
       
       drawer: GFDrawer(
-  child: ListView(
-    padding: EdgeInsets.zero,
-    children: const <Widget>[
-      ListTile(
-        title: Text('Item 1'),
-        onTap: null,
+      child: Container(
+        decoration:  const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+                 colors: [
+                 Color(0xffE59500),
+                  Color(0xff02040F),
+                  Color(0xffe5dada)
+                ],
+                stops: [ 0.1, 1.9, 0.3],
+          ),
+        ),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 50.0),
+              child: ListTile(
+                title: Text(
+                  "Bazaar",
+                  style: GoogleFonts.bonaNova(
+                    textStyle: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 30,
+                    ),
+                  ),
+                ),
+                onTap: null,
+              ),
+            ),
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.only(top: 10),
+                children:  [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: ListTile(
+                      leading: const Icon(Icons.home, size: 27, color: Colors.white),
+                      title: const Text('Home', style: TextStyle(fontSize: 14, color: Colors.white)),
+                      onTap:  () {  Get.toNamed('/home');},
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: ListTile(
+                      leading: const Icon(Icons.shopping_bag_rounded, size: 27, color: Colors.white),
+                      title: const Text('Shop', style: TextStyle(fontSize: 14, color: Colors.white)),
+                      onTap: () =>  Get.toNamed('/shop')
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: ListTile(
+                      leading: Icon(Icons.phone, size: 27, color: Colors.white),
+                      title: Text('Contact Us', style: TextStyle(fontSize: 14, color: Colors.white)),
+                      onTap: null,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Divider(color: Colors.white70, thickness: 1, indent: 15, endIndent: 15),
+            const Padding(
+              padding: EdgeInsets.only(left: 10),
+              child: ListTile(
+                leading: Icon(Icons.settings, size: 27, color: Colors.white),
+                title: Text('Settings', style: TextStyle(fontSize: 14, color: Colors.white)),
+                onTap: null,
+              ),
+            ),
+            const Divider(color: Colors.white70, thickness: 1, indent: 15, endIndent: 15),
+            const Padding(
+              padding: EdgeInsets.only(left: 10, bottom: 20),
+              child: ListTile(
+                leading: Icon(Icons.logout, size: 27, color: Colors.white),
+                title: Text('Log Out', style: TextStyle(fontSize: 14, color: Colors.white)),
+                onTap: null,
+              ),
+            ),
+          ],
+        ),
       ),
-      ListTile(
-         title: Text('Item 2'),
-         onTap: null,
-      ),
-    ],
-  ),
-),
+    ),
       body: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
             scrollDirection: Axis.vertical,
@@ -82,58 +151,58 @@ automaticallyImplyLeading: false,
       child: centerDisplayCard(),
     ),
   GFSearchBar(
-            searchList: productController.list,
-            searchQueryBuilder: (query, list) {
-              return list
-                  .where((item) =>
-                      item?.toLfowerCase().contains(query.toLowerCase()))
-                  .toList();
-            },
-            overlaySearchListHeight: 150,
-            overlaySearchListItemBuilder: (item) {    
-              return Container(
-                padding: const EdgeInsets.all(8),
-                child: Text(
-                  item,
-                  style: const TextStyle(fontSize: 12),
+              searchList: productController.list,
+              searchQueryBuilder: (query, list) {
+                return list.where((item) =>
+                        item.toLowerCase().contains(query.toLowerCase() )?? false)
+                    .toList();
+              },
+              overlaySearchListHeight: 150,
+              overlaySearchListItemBuilder: (String? item) {    
+                return Container(
+                  padding: const EdgeInsets.all(8),
+                  child: Text(
+                    item ??"",
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                );
+              },
+              searchBoxInputDecoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(
+                    color: Colors.transparent,
+                  ),
+                  borderRadius: BorderRadius.circular(50),
                 ),
-              );
-            },
-            searchBoxInputDecoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                  color: Colors.transparent,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(
+                    color: Colors.transparent,
+                  ),
+                  borderRadius: BorderRadius.circular(50),
                 ),
-                borderRadius: BorderRadius.circular(50),
+                hintText: 'Search',
+                hintStyle: const TextStyle(fontSize: 12),
+                contentPadding: const EdgeInsets.only(left: 28),
+                filled: true,
+                fillColor: Colors.grey.shade100,
+    
+                prefixIcon: const Padding(
+                  padding: EdgeInsets.only(right: 24.0, left: 16.0),
+                  child: Icon(
+                    Icons.search,
+                    color: Colors.black,
+                    size: 20,
+                  ),
+    
+                ),
               ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                  color: Colors.transparent,
-                ),
-                borderRadius: BorderRadius.circular(50),
-              ),
-              hintText: 'Search',
-              hintStyle: const TextStyle(fontSize: 12),
-              contentPadding: const EdgeInsets.only(left: 28),
-              filled: true,
-              fillColor: Colors.grey.shade100,
-
-              prefixIcon: const Padding(
-                padding: EdgeInsets.only(right: 24.0, left: 16.0),
-                child: Icon(
-                  Icons.search,
-                  color: Colors.black,
-                  size: 20,
-                ),
-
-              ),
+              onItemSelected: (item) {
+                // setState(() {
+                //   print('$item');
+                // });
+              },
             ),
-            onItemSelected: (item) {
-              // setState(() {
-              //   print('$item');
-              // });
-            },
-          ),
+  
     Obx(() {
       // Single Obx for both `isProductListEmpty` and `productList`
       if (productController.isProductListEmpty.value) {
