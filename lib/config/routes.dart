@@ -1,8 +1,16 @@
 import 'package:get/get.dart';
 import 'package:getx_app/drawer/shop/shop.dart';
 import 'package:getx_app/start/home_screen.dart';
+import 'package:getx_app/start/splash_screen.dart';
 
 appRoutes() => [
+  GetPage(
+        name: '/splash',
+        page: () => const SplashScreen(),
+        transition: Transition.leftToRight,
+        
+        transitionDuration: const Duration(milliseconds: 500),
+      ),
       GetPage(
         name: '/home',
         page: () => HomeScreen(),

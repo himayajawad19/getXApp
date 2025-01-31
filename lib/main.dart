@@ -12,12 +12,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      title: 'Bazaar',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
       ),
       home: HomeScreen(), // Initial route
-      initialRoute: '/home',
+      initialRoute: '/splash',
       getPages: appRoutes(),
     );
   }
