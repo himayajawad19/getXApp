@@ -9,6 +9,14 @@ class LoginController  extends GetxController{
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  var showPassword = false.obs;
+ GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+
+  void toggle() {
+    showPassword.value = !showPassword.value;
+    log(showPassword.value.toString());
+  }
 
   Future<User?> signInWithEmailPassword(String email, String password, BuildContext context) async {
     try {

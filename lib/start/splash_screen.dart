@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
      
     });
      Future.delayed(const Duration(seconds: 4), () {
-      Get.toNamed('/home');
+      Get.toNamed('/login');
     });
   }
 

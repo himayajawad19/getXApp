@@ -11,6 +11,7 @@ final LoginController loginController= Get.put(LoginController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Center(
         child: Container(
           decoration: const BoxDecoration(
@@ -89,111 +90,129 @@ final LoginController loginController= Get.put(LoginController());
                                    SizedBox(
                                       height: 60.h,
                                     ),
-                                TextField(
-                                  style: const TextStyle(color: Colors.white60),
-                                  controller: loginController.emailController,
-                                      decoration: InputDecoration(
-                                        labelText: "Email",
-                                         labelStyle: const TextStyle(
-                                            color: Colors.white60),
-                                        hintText: "Email",
-                                        hintStyle:
-                                            TextStyle(color: Colors.grey[600]),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                         
-                                        ),
-                                        
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          borderSide: const BorderSide(
-                                            color: Colors.white60, // Focused border color
-                                            width: 1,
+                                Form(
+                                  key: loginController.formKey,
+                                  child: Column(
+                                    children: [
+                                      TextField(
+                                        style: const TextStyle(color: Colors.white60),
+                                        controller: loginController.emailController,
+                                            decoration: InputDecoration(
+                                              labelText: "Email",
+                                               labelStyle: const TextStyle(
+                                                  color: Colors.white60),
+                                              hintText: "Email",
+                                              hintStyle:
+                                                  TextStyle(color: Colors.grey[600]),
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                               
+                                              ),
+                                              
+                                              focusedBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                borderSide: const BorderSide(
+                                                  color: Colors.white60, // Focused border color
+                                                  width: 1,
+                                                ),
+                                              ),
+                                                                  
+                                              contentPadding: const EdgeInsets.symmetric(
+                                                  horizontal: 16,
+                                                  vertical:
+                                                      12), // Padding inside the TextField
+                                            ),
+                                          )
+                                          ,
+                                         SizedBox(height: 20.h,),
+                                         Obx(
+                                           ()=> TextField(
+                                            obscureText: loginController.showPassword.value,
+                                            controller: loginController.passwordController,
+                                            style: const TextStyle(
+                                                  color: Colors.white60),
+                                              decoration: InputDecoration(
+                                              
+                                                labelText: "Password",
+                                                labelStyle:  const TextStyle(color: Colors.white60),
+                                                hintText: "Password",
+                                                hintStyle:
+                                                    TextStyle(color: Colors.grey[600]),
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                ),
+                                                focusedBorder: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  borderSide: const BorderSide(
+                                                    color: Colors
+                                                        .white60, // Focused border color
+                                                    width: 1,
+                                                  ),
+                                                ),
+                                                suffixIcon: 
+                                                Obx(
+                                                  ()=> InkWell(
+                                                    onTap: () => loginController.toggle(),
+                                                    child: Icon( loginController.showPassword.value? Icons.visibility_off:Icons.remove_red_eye,
+                                                     ),
+                                                  ),
+                                                ),
+                                                contentPadding: const EdgeInsets
+                                                    .symmetric(
+                                                    horizontal: 16,
+                                                    vertical:
+                                                        12), 
+                                                        // Padding inside the TextField
+                                              ),
+                                              
+                                            ),
+                                         ),
+                                          SizedBox(
+                                            height: 20.h,
+                                          ),
+                                          Align(
+                                        alignment: Alignment.bottomRight,
+                                        child: TextButton(
+                                          onPressed: () {
+                                            // Your action when the button is pressed
+                                          },
+                                          child: const Text(
+                                            "Forgot Password?",
+                                            style: TextStyle(color: Colors.white60),
                                           ),
                                         ),
-                            
-                                        contentPadding: const EdgeInsets.symmetric(
-                                            horizontal: 16,
-                                            vertical:
-                                                12), // Padding inside the TextField
-                                      ),
-                                    )
-                                    ,
-                                   SizedBox(height: 20.h,),
-                                   TextField(
-                                    controller: loginController.passwordController,
-                                    style: const TextStyle(
-                                          color: Colors.white60),
-                                      decoration: InputDecoration(
-                                        labelText: "Password",
-                                        labelStyle:  const TextStyle(color: Colors.white60),
-                                        hintText: "Password",
-                                        hintStyle:
-                                            TextStyle(color: Colors.grey[600]),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          borderSide: const BorderSide(
-                                            color: Colors
-                                                .white60, // Focused border color
-                                            width: 1,
+                                      )
+                                      ,
+                                          SizedBox(
+                                            height: 30.h,
                                           ),
-                                        ),
-                                        suffixIcon: const Icon(Icons.remove_red_eye),
-                                        contentPadding: const EdgeInsets
-                                            .symmetric(
-                                            horizontal: 16,
-                                            vertical:
-                                                12), 
-                                                // Padding inside the TextField
-                                      ),
-                                      
-                                    ),
-                                    SizedBox(
-                                      height: 20.h,
-                                    ),
-                                    Align(
-  alignment: Alignment.bottomRight,
-  child: TextButton(
-    onPressed: () {
-      // Your action when the button is pressed
-    },
-    child: const Text(
-      "Forgot Password?",
-      style: TextStyle(color: Colors.white60),
-    ),
-  ),
-)
-,
-                                    SizedBox(
-                                      height: 30.h,
-                                    ),
-                                     Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: const Color.fromARGB(183, 229, 149, 0),
-            borderRadius: BorderRadius.circular(30),
-          ),
-          child: MaterialButton(
-            onPressed: (){ 
-              loginController.signInWithEmailPassword(loginController.emailController.text, loginController.passwordController.text, context);
-},
-            child:  Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: 
-              Text(
-                  "Login",
-                  style: TextStyle(color: Colors.white60, fontSize: 18.sp),
-              
-              ),
-            ),
-          ),),
+                                           Container(
+                                                width: double.infinity,
+                                                decoration: BoxDecoration(
+                                                  color: const Color.fromARGB(183, 229, 149, 0),
+                                                  borderRadius: BorderRadius.circular(30),
+                                                ),
+                                                child: MaterialButton(
+                                                  onPressed: (){ 
+                                                    loginController.signInWithEmailPassword(loginController.emailController.text, loginController.passwordController.text, context);
+                                      },
+                                                  child:  Padding(
+                                                    padding: const EdgeInsets.all(16.0),
+                                                    child: 
+                                                    Text(
+                                                        "Login",
+                                                        style: TextStyle(color: Colors.white60, fontSize: 18.sp),
+                                                    
+                                                    ),
+                                                  ),
+                                                ),),
+                                    ],
+                                  ),
+                                ),
                                   ],),
                               ),
                             ),
