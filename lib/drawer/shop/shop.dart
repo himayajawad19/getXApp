@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:getwidget/components/drawer/gf_drawer.dart';
 import 'package:getx_app/controller/product_controller.dart';
-import 'package:getx_app/start/product_tile.dart';
+import 'package:getx_app/widgets/product_tile.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -21,9 +20,9 @@ class Shop extends StatelessWidget {
         title: Text(
           "Bazaar",
           style: GoogleFonts.bonaNova(
-            textStyle: const TextStyle(
+            textStyle:  TextStyle(
               color: Colors.black,
-              fontSize: 30,
+              fontSize: 30.sp,
             ),
           ),
         ),
@@ -66,9 +65,9 @@ class Shop extends StatelessWidget {
                   title: Text(
                     "Bazaar",
                     style: GoogleFonts.bonaNova(
-                      textStyle: const TextStyle(
+                      textStyle: TextStyle(
                         color: Colors.black,
-                        fontSize: 30,
+                        fontSize: 30.sp,
                       ),
                     ),
                   ),
@@ -82,11 +81,11 @@ class Shop extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: ListTile(
-                        leading: const Icon(Icons.home,
-                            size: 27, color: Colors.white),
-                        title: const Text('Home',
+                        leading: Icon(Icons.home,
+                            size: 27.sp, color: Colors.white),
+                        title:  Text('Home',
                             style:
-                                TextStyle(fontSize: 14, color: Colors.white)),
+                                TextStyle(fontSize: 14.sp, color: Colors.white)),
                         onTap: () {
                           Get.toNamed('/home');
                         },
@@ -95,21 +94,21 @@ class Shop extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: ListTile(
-                          leading: const Icon(Icons.shopping_bag_rounded,
-                              size: 27, color: Colors.white),
-                          title: const Text('Shop',
+                          leading: Icon(Icons.shopping_bag_rounded,
+                              size: 27.sp, color: Colors.white),
+                          title:  Text('Shop',
                               style:
-                                  TextStyle(fontSize: 14, color: Colors.white)),
+                                  TextStyle(fontSize: 14.sp, color: Colors.white)),
                           onTap: () => Get.toNamed('/shop')),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 10),
+                     Padding(
+                      padding: const EdgeInsets.only(left: 10),
                       child: ListTile(
                         leading:
-                            Icon(Icons.phone, size: 27, color: Colors.white),
+                            Icon(Icons.phone, size: 27.sp, color: Colors.white),
                         title: Text('Contact Us',
                             style:
-                                TextStyle(fontSize: 14, color: Colors.white)),
+                                TextStyle(fontSize: 14.sp, color: Colors.white)),
                         onTap: null,
                       ),
                     ),
@@ -121,12 +120,12 @@ class Shop extends StatelessWidget {
                   thickness: 1,
                   indent: 15,
                   endIndent: 15),
-              const Padding(
-                padding: EdgeInsets.only(left: 10),
+               Padding(
+                padding: const EdgeInsets.only(left: 10),
                 child: ListTile(
-                  leading: Icon(Icons.settings, size: 27, color: Colors.white),
+                  leading: Icon(Icons.settings, size: 27.sp, color: Colors.white),
                   title: Text('Settings',
-                      style: TextStyle(fontSize: 14, color: Colors.white)),
+                      style: TextStyle(fontSize: 14.sp, color: Colors.white)),
                   onTap: null,
                 ),
               ),
@@ -135,12 +134,12 @@ class Shop extends StatelessWidget {
                   thickness: 1,
                   indent: 15,
                   endIndent: 15),
-              const Padding(
-                padding: EdgeInsets.only(left: 10, bottom: 20),
+               Padding(
+                padding: const EdgeInsets.only(left: 10, bottom: 20),
                 child: ListTile(
-                  leading: Icon(Icons.logout, size: 27, color: Colors.white),
+                  leading: Icon(Icons.logout, size: 27.sp, color: Colors.white),
                   title: Text('Log Out',
-                      style: TextStyle(fontSize: 14, color: Colors.white)),
+                      style: TextStyle(fontSize: 14.sp, color: Colors.white)),
                   onTap: null,
                 ),
               ),
@@ -149,7 +148,7 @@ class Shop extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
+            physics:  const AlwaysScrollableScrollPhysics(),
             scrollDirection: Axis.vertical,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -194,13 +193,13 @@ class Shop extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 20, top: 10),
+                          padding:  const EdgeInsets.only(left: 20, top: 10),
                           child: Text(
                             "All Products",
                             style: GoogleFonts.roboto(
-                              textStyle: const TextStyle(
+                              textStyle:  TextStyle(
                                 color: Colors.black,
-                                fontSize: 12,
+                                fontSize: 12.sp,
                               ),
                             ),
                           ),

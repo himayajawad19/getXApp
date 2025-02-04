@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getx_app/models/product.dart';
 import 'package:getx_app/utils/app_constants.dart';
@@ -34,15 +35,15 @@ class ProductTile extends StatelessWidget {
                       fit: BoxFit.contain,
                     ),
                   ),
-              const SizedBox(height: 8),
+             SizedBox(height: 8.h),
               Text(
                 product.title,
                 maxLines: 2,
                 style:
-                    const TextStyle(fontFamily: 'avenir', fontWeight: FontWeight.w400, fontSize: 12),
+                    TextStyle(fontFamily: 'avenir', fontWeight: FontWeight.w400, fontSize: 12.sp),
                 overflow: TextOverflow.ellipsis,
               ),
-              const SizedBox(height: 8),
+             SizedBox(height: 8.h),
               Row(
                 children: [
                   Container(
@@ -55,14 +56,14 @@ class ProductTile extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          "${'\$'}${product.price.toString()}",
-                          style: const TextStyle(color: Colors.white),
+                          "${'\$'}${product.price.toString() ??""}",
+                          style: TextStyle(color: Colors.white,fontSize: 13.sp),
                         ),
                        
                       ],
                     ),
                   ),
-                     const SizedBox(width: 2),
+                     SizedBox(width: 2.w),
                      
                   Container(
                     decoration: BoxDecoration(
@@ -70,15 +71,15 @@ class ProductTile extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                    child: const Row(
+                    child:  Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Row(
                           children: [
-                            Icon(Icons.shopping_bag_outlined,color: Colors.white, size: 18),
+                            Icon(Icons.shopping_bag_outlined,color: Colors.white, size: 18.sp),
                             Text(
                               "Buy",
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: Colors.white, fontSize: 13.sp),
                             ),
                           ],
                         ),

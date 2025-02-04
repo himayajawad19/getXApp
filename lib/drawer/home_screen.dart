@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:getwidget/components/carousel/gf_carousel.dart';
-import 'package:getwidget/components/search_bar/gf_search_bar.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:getx_app/controller/product_controller.dart';
-import 'package:getx_app/start/product_tile.dart';
+import 'package:getx_app/widgets/product_tile.dart';
 import 'package:getx_app/utils/app_constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
@@ -35,9 +33,9 @@ class HomeScreen extends StatelessWidget {
        Text(
   "Bazaar",
   style: GoogleFonts.bonaNova(
-    textStyle: const TextStyle(
+    textStyle:  TextStyle(
       color: Colors.black,
-      fontSize: 30,
+      fontSize: 30.sp,
     ),
   ),
 ),
@@ -78,9 +76,9 @@ automaticallyImplyLeading: false,
                 title: Text(
                   "Bazaar",
                   style: GoogleFonts.bonaNova(
-                    textStyle: const TextStyle(
+                    textStyle:  TextStyle(
                       color: Colors.black,
-                      fontSize: 30,
+                      fontSize: 30.sp,
                     ),
                   ),
                 ),
@@ -94,24 +92,24 @@ automaticallyImplyLeading: false,
                   Padding(
                     padding: const EdgeInsets.only(left: 10),
                     child: ListTile(
-                      leading: const Icon(Icons.home, size: 27, color: Colors.white),
-                      title: const Text('Home', style: TextStyle(fontSize: 14, color: Colors.white)),
+                      leading:  Icon(Icons.home, size: 27.sp, color: Colors.white),
+                      title:  Text('Home', style: TextStyle(fontSize: 14.sp, color: Colors.white)),
                       onTap:  () {  Get.toNamed('/home');},
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10),
                     child: ListTile(
-                      leading: const Icon(Icons.shopping_bag_rounded, size: 27, color: Colors.white),
-                      title: const Text('Shop', style: TextStyle(fontSize: 14, color: Colors.white)),
+                      leading:  Icon(Icons.shopping_bag_rounded, size: 27.sp, color: Colors.white),
+                      title:  Text('Shop', style: TextStyle(fontSize: 14.sp, color: Colors.white)),
                       onTap: () =>  Get.toNamed('/shop')
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 10),
+                 Padding(
+                    padding: const EdgeInsets.only(left: 10),
                     child: ListTile(
-                      leading: Icon(Icons.phone, size: 27, color: Colors.white),
-                      title: Text('Contact Us', style: TextStyle(fontSize: 14, color: Colors.white)),
+                      leading: Icon(Icons.phone, size: 27.sp, color: Colors.white),
+                      title: Text('Contact Us', style: TextStyle(fontSize: 14.sp, color: Colors.white)),
                       onTap: null,
                     ),
                   ),
@@ -119,20 +117,20 @@ automaticallyImplyLeading: false,
               ),
             ),
             const Divider(color: Colors.white70, thickness: 1, indent: 15, endIndent: 15),
-            const Padding(
-              padding: EdgeInsets.only(left: 10),
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
               child: ListTile(
-                leading: Icon(Icons.settings, size: 27, color: Colors.white),
-                title: Text('Settings', style: TextStyle(fontSize: 14, color: Colors.white)),
+                leading: Icon(Icons.settings, size: 27.sp, color: Colors.white),
+                title: Text('Settings', style: TextStyle(fontSize: 14.sp, color: Colors.white)),
                 onTap: null,
               ),
             ),
             const Divider(color: Colors.white70, thickness: 1, indent: 15, endIndent: 15),
-            const Padding(
-              padding: EdgeInsets.only(left: 10, bottom: 20),
+             Padding(
+              padding: const EdgeInsets.only(left: 10, bottom: 20),
               child: ListTile(
-                leading: Icon(Icons.logout, size: 27, color: Colors.white),
-                title: Text('Log Out', style: TextStyle(fontSize: 14, color: Colors.white)),
+                leading: Icon(Icons.logout, size: 27.sp, color: Colors.white),
+                title: Text('Log Out', style: TextStyle(fontSize: 14.sp, color: Colors.white)),
                 onTap: null,
               ),
             ),
@@ -164,7 +162,7 @@ automaticallyImplyLeading: false,
                   padding: const EdgeInsets.all(8),
                   child: Text(
                     item ??"",
-                    style: const TextStyle(fontSize: 12),
+                    style:  TextStyle(fontSize: 12.sp),
                   ),
                 );
               },
@@ -246,9 +244,9 @@ automaticallyImplyLeading: false,
               child: Text(
                 "Featured Products",
                 style: GoogleFonts.roboto(
-                  textStyle: const TextStyle(
+                  textStyle:  TextStyle(
                     color: Colors.black,
-                    fontSize: 12,
+                    fontSize: 12.sp,
                   ),
                 ),
               ),
